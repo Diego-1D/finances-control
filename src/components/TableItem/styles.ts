@@ -6,12 +6,11 @@ export const TableColumn = styled.td`
     padding: 10px 0;
 `;
 
-export const Category = styled.div<{color:string}>`
+export const Category = styled.div`
     display: inline-block;
     padding: 5px 10px;
     border-radius: 5px;
-    color: #FFF;
-    background-color:${props => props.color};
+    color: #000;
 `;
 
 export const Value = styled.div<{color:string}>`

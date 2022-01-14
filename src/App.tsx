@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import * as C from './App.styles';
 import { Item } from './types/Item';
-import { Category } from './types/Category';
-import { categories } from './data/categories';
 import { items } from './data/items';
 import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilter";
 import { TableArea } from "./components/TableArea";
 import { InfoArea } from "./components/InfoArea";
 import { InputArea } from "./components/InputArea";
+import { db } from "./config/firebase";
+import { collection, query, getDocs } from 'firebase/firestore';
+
 
 function App() {
   const [list, setList] = useState(items);
@@ -16,16 +17,39 @@ function App() {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
 
+  const [agendamentos, setAgendamentos] = useState<Item[]>([]);
+
+  const citiesRef = async () => {
+    const q = query(collection(db, "items"));
+    const querySnapshot = await getDocs(q);
+    const agendamentoLista:any = [];
+    querySnapshot.forEach(doc => {
+      agendamentoLista.push(doc.data());
+    });
+    setAgendamentos(agendamentoLista);
+    console.log(agendamentoLista);
+  }
+
   useEffect(() => {
-    setFilteredList(filterListByMonth(list, currentMonth));
-  }, [list, currentMonth]);
+    citiesRef();
+  }, [])
+
+
+  // useEffect(() => {
+  //   setFilteredList(filterListByMonth(list, currentMonth));
+  // }, [list, currentMonth]);
+
+  
+  useEffect(() => {
+    setFilteredList(agendamentos);
+  }, [agendamentos]);
 
   useEffect(() => {
     let incomeCount = 0;
     let expenseCount = 0;
 
     for (let i in filteredList) {
-      if (categories[filteredList[i].category].expense) {
+      if (filteredList[i].expense = true) {
         expenseCount += filteredList[i].value;
       } else {
         incomeCount += filteredList[i].value;
@@ -39,11 +63,11 @@ function App() {
     setCurrentMonth(newMonth);
   }
 
-const handleAddItem = (item:Item) => {
-  let newList = [...list];
-  newList.push(item);
-  setList(newList);
-}
+  // const handleAddItem = (item: Item) => {
+  //   let newList = [...agendamentos];
+  //   newList.push(item);
+  //   setList(newList);
+  // }
 
   return (
     <C.Container>
@@ -57,7 +81,8 @@ const handleAddItem = (item:Item) => {
           income={income}
           expense={expense}
         />
-        <InputArea onAdd={handleAddItem}/>
+        {/* <InputArea onAdd={handleAddItem} /> */}
+        <InputArea/>
         <TableArea list={filteredList} />
       </C.Body>
     </C.Container>
