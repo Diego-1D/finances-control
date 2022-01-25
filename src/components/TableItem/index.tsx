@@ -7,17 +7,14 @@ type Props = {
 }
 
 export const TableItem = ({ item }: Props) => {
+
     return (
         <C.TableLine>
-            {/* <C.TableColumn>{formatDate(item.date)}</C.TableColumn> */}
-            <C.TableColumn>
-                <C.Category color={item.category}>
-                    {item.category}
-                </C.Category>
-            </C.TableColumn>
+            <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
+            <C.TableColumn> {item.category} </C.TableColumn>
             <C.TableColumn>{item.title}</C.TableColumn>
             <C.TableColumn>
-                <C.Value color={item.expense ? 'red' : 'green'}>
+                <C.Value color={item.expense ? 'green' : 'red'}>
                     {
                         new Intl.NumberFormat('pt-BR', {
                             style: 'currency',

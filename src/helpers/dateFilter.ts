@@ -6,6 +6,9 @@ export const getCurrentMonth = () => {
 }
 
 export const filterListByMonth = (list: Item[], date: string): Item[] => {
+
+    console.log('TESTE: ', list);
+    
     let newList: Item[] = [];
     let [year, month] = date.split('-');
 
@@ -21,7 +24,8 @@ export const filterListByMonth = (list: Item[], date: string): Item[] => {
     return newList;
 }
 
-export const formatDate = (date: Date):string => {
+export const formatDate = (firebaseTimestamp: any):string => {
+    const date = new Date(firebaseTimestamp.toDate());
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();

@@ -4,85 +4,79 @@ import { Item } from './types/Item';
 import { items } from './data/items';
 import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilter";
 import { TableArea } from "./components/TableArea";
+import { TransactionArea } from "./components/TransactionArea";
 import { InfoArea } from "./components/InfoArea";
-import { InputArea } from "./components/InputArea";
 import { db } from "./config/firebase";
-import { collection, query, getDocs } from 'firebase/firestore';
-
+import { collection, query, onSnapshot } from 'firebase/firestore';
 
 function App() {
-  const [list, setList] = useState(items);
+  // const [list, setList] = useState(items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
-
-  const [agendamentos, setAgendamentos] = useState<Item[]>([]);
-
-  const citiesRef = async () => {
-    const q = query(collection(db, "items"));
-    const querySnapshot = await getDocs(q);
-    const agendamentoLista:any = [];
-    querySnapshot.forEach(doc => {
-      agendamentoLista.push(doc.data());
-    });
-    setAgendamentos(agendamentoLista);
-    console.log(agendamentoLista);
-  }
+  const [listagem, setListagem] = useState<Item[]>([]);
 
   useEffect(() => {
-    citiesRef();
+    const q = query(collection(db, "items"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const lista: any[] = [];
+      querySnapshot.forEach((doc) => {
+        lista.push(doc.data());
+      });
+      setListagem(lista);
+    });
+    return () => {
+      unsubscribe();
+    };
   }, [])
-
 
   // useEffect(() => {
   //   setFilteredList(filterListByMonth(list, currentMonth));
   // }, [list, currentMonth]);
 
-  
   useEffect(() => {
-    setFilteredList(agendamentos);
-  }, [agendamentos]);
+    setFilteredList(filterListByMonth(listagem, currentMonth));
+  }, [listagem, currentMonth]);
+
+  // useEffect(() => {
+  //   setFilteredList(listagem);
+  // }, [listagem]);
 
   useEffect(() => {
     let incomeCount = 0;
     let expenseCount = 0;
 
     for (let i in filteredList) {
-      if (filteredList[i].expense = true) {
-        expenseCount += filteredList[i].value;
-      } else {
+      if (filteredList[i].expense === true) {
         incomeCount += filteredList[i].value;
+      } else {
+        expenseCount += filteredList[i].value;
       }
     }
     setIncome(incomeCount);
     setExpense(expenseCount);
-  }, [filteredList]);
+  }, [filteredList, income, expense]);
 
   const handleMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
   }
 
-  // const handleAddItem = (item: Item) => {
-  //   let newList = [...agendamentos];
-  //   newList.push(item);
-  //   setList(newList);
-  // }
-
   return (
     <C.Container>
       <C.Header>
-        <C.HeaderText>Sistema Financeiro</C.HeaderText>
+        {/* <C.Icon src='https://cdn-icons.flaticon.com/png/512/5550/premium/5550846.png?token=exp=1642379974~hmac=73bb445d2975e928e58bcd013d7487fc'/> */}
+        <C.HeaderText>Finances Control</C.HeaderText>
       </C.Header>
       <C.Body>
         <InfoArea
-          currentMonth={currentMonth}
-          onMonthChange={handleMonthChange}
           income={income}
           expense={expense}
         />
-        {/* <InputArea onAdd={handleAddItem} /> */}
-        <InputArea/>
+        <TransactionArea
+          currentMonth={currentMonth}
+          onMonthChange={handleMonthChange}
+        />
         <TableArea list={filteredList} />
       </C.Body>
     </C.Container>

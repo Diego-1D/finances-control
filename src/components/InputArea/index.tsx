@@ -5,10 +5,6 @@ import { useState } from 'react';
 import { setDoc, doc, collection, query, getDocs, addDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 
-// type Props = {
-//     onAdd: (item: Item) => void;
-// }
-
 export const InputArea = () => {
 
     const [titleField, setTitleField] = useState('');
@@ -43,21 +39,9 @@ export const InputArea = () => {
                 title: titleField,
                 value: valueField
             });
-            // onAdd({
-            //     // date: new Date(dateField),
-            //     // category: categoryField,
-            //     // title: titleField,
-            //     // value: valueField,
-            //     // expense:true
-
-            // });
             clearFields();
         }
     }
-
-
-
-
 
 
     const clearFields = () => {
@@ -101,10 +85,6 @@ export const InputArea = () => {
                 <p>&nbsp;</p>
                 <button onClick={handleAddEvent}>Adicionar</button>
             </C.Area>
-            {/* <C.Area>
-                <p>&nbsp;</p>
-                <button onClick={addEvent}>Add</button>
-            </C.Area> */}
         </C.Container>
     )
 }
