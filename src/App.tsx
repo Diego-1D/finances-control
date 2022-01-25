@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import * as C from './App.styles';
-import { Item } from './types/Item';
-import { items } from './data/items';
+import * as C from "./App.styles";
+import { Item } from "./types/Item";
+import { items } from "./data/items";
 import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilter";
 import { TableArea } from "./components/TableArea";
 import { TransactionArea } from "./components/TransactionArea";
 import { InfoArea } from "./components/InfoArea";
 import { db } from "./config/firebase";
-import { collection, query, onSnapshot } from 'firebase/firestore';
+import { collection, query, onSnapshot } from "firebase/firestore";
 
 function App() {
   // const [list, setList] = useState(items);
@@ -17,6 +17,7 @@ function App() {
   const [expense, setExpense] = useState(0);
   const [listagem, setListagem] = useState<Item[]>([]);
 
+  console.log("dados: ", listagem);
   useEffect(() => {
     const q = query(collection(db, "items"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -29,7 +30,7 @@ function App() {
     return () => {
       unsubscribe();
     };
-  }, [])
+  }, []);
 
   // useEffect(() => {
   //   setFilteredList(filterListByMonth(list, currentMonth));
@@ -59,8 +60,10 @@ function App() {
   }, [filteredList, income, expense]);
 
   const handleMonthChange = (newMonth: string) => {
+    console.log("month> ", newMonth);
+    console.log("tipo da data> ", typeof newMonth);
     setCurrentMonth(newMonth);
-  }
+  };
 
   return (
     <C.Container>
@@ -69,10 +72,7 @@ function App() {
         <C.HeaderText>Finances Control</C.HeaderText>
       </C.Header>
       <C.Body>
-        <InfoArea
-          income={income}
-          expense={expense}
-        />
+        <InfoArea income={income} expense={expense} />
         <TransactionArea
           currentMonth={currentMonth}
           onMonthChange={handleMonthChange}
