@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FiArrowLeftCircle, FiArrowRightCircle  } from "react-icons/fi";
 
 export const Container = styled.div`
     background-color: #FFF;
@@ -10,39 +11,77 @@ export const Container = styled.div`
     margin-right: 20px;
     display:flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+
+    @media(max-width: 590px){
+        padding: 10px 5px;
+    }
 `;
 
 export const MonthArea = styled.div`
-    flex: 1;
+    width: 230px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    
+    @media(max-width: 590px){
+        width: 180px;
+    }
 `;
 
-export const MonthArrow = styled.div`
-    width: 40px;
-    text-align: center;
-    font-size: 25px;
+export const MonthArrowLeft = styled(FiArrowLeftCircle)`
+    width: 25px;
+    height: 25px;
     cursor: pointer;
+
+    @media(max-width: 590px){
+        width: 20px;
+        height: 20px;
+    }
+`;
+
+export const MonthArrowRight = styled(FiArrowRightCircle)`
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+
+    @media(max-width: 590px){
+        width: 20px;
+        height: 20px;
+    }
 `;
 
 export const MonthTitle = styled.div`
-    flex: 1;
-    text-align: center;
+     font-size: 18px;
+
+     @media(max-width: 590px){
+        font-size: 16px;
+    }
 `;
 
 export const Area = styled.div`
-    flex: 2;
-    display: flex;
-    justify-content: flex-end;
 `;
 
 export const Button = styled.div`
-    padding: 10px 30px;
-    background-color: #379964;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 230px;
+    background-color: #006600;
     border-radius: 10px;
     color: #FFF;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+
+    &:hover{
+        background-color: #129212;
+    }
+
+    @media(max-width: 590px){
+        font-size: 12px;
+        width: 125px;
+        margin-left: 5px;
+    }
 `;

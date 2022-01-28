@@ -12,13 +12,14 @@ export const Container = styled.div`
     justify-content: center;
     z-index:999;
     overscroll-behavior: block;
+    padding: 0 15px;
 `;
 
 export const Area = styled.div`
     width: 23rem;
     height: 32rem;
     background-color: #FFF;
-    padding: 0 30px;
+    padding: 0 20px;
     border-radius: 10px;
 `;
 
@@ -49,7 +50,7 @@ export const InfoAreaExpense = styled.div`
     justify-content: space-between;
 `;
 
-export const ButtonExpense = styled.div`
+export const ButtonExpense = styled.button`
     width: 9rem;
     height: 4rem;
     border-radius: 5px;
@@ -58,11 +59,8 @@ export const ButtonExpense = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-top: 18px;
-
-    &:hover{
-
-    }
+    margin-top: 18px; 
+    border: 0;
 `;
 
 export const AddButton = styled.div`
@@ -74,7 +72,7 @@ export const AddButton = styled.div`
     font-weight: bold;
     border-radius: 5px;
     padding: 15px;
-    margin: 20px 40px;
+    margin: 20px 0px;
     cursor: pointer;
 
     &:hover{

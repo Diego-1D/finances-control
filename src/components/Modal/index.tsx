@@ -6,7 +6,7 @@ import { db } from "../../config/firebase";
 
 import moment from "moment";
 
-export const Modal = ({ id = "modal", onClose = () => {} }) => {
+export const Modal = ({ id = "modal", onClose = () => { } }) => {
   const [titleField, setTitleField] = useState("");
   const [dateField, setDateField] = useState("");
   const [categoryField, setCategoryField] = useState("");
@@ -94,15 +94,15 @@ export const Modal = ({ id = "modal", onClose = () => {} }) => {
         </C.InfoArea>
         <C.InfoAreaExpense>
           <C.ButtonExpense
-            color="rgba(75, 173, 131, 1)"
             onClick={() => setExpenseField(true)}
+            color={expenseField === true ? '#116d45': '#4bad83'}
           >
             <C.Icon src="https://cdn-icons-png.flaticon.com/512/1692/1692598.png" />
             <C.Title>ENTRADA</C.Title>
           </C.ButtonExpense>
           <C.ButtonExpense
-            color="rgba(255, 0, 0, 0.8)"
             onClick={() => setExpenseField(false)}
+            color={expenseField === false ? 'rgb(255, 0, 0)': 'rgba(255, 0, 0, 0.7)'}
           >
             <C.Icon src="https://cdn-icons-png.flaticon.com/512/3141/3141818.png" />
             <C.Title>SAÍDA</C.Title>

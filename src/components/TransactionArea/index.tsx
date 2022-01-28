@@ -1,6 +1,7 @@
 import * as C from "./styles";
 import { formatCurrentMonth } from "../../helpers/dateFilter";
 import { useState } from "react";
+
 import { Modal } from "../Modal";
 
 type Props = {
@@ -32,9 +33,9 @@ export const TransactionArea = ({ currentMonth, onMonthChange }: Props) => {
   return (
     <C.Container>
       <C.MonthArea>
-        <C.MonthArrow onClick={handlePrevMonth}>⬅️</C.MonthArrow>
+        <C.MonthArrowLeft onClick={handlePrevMonth} />
         <C.MonthTitle>{formatCurrentMonth(currentMonth)}</C.MonthTitle>
-        <C.MonthArrow onClick={handleNextMonth}>➡️</C.MonthArrow>
+        <C.MonthArrowRight onClick={handleNextMonth}/>
       </C.MonthArea>
       <C.Area>
         <C.Button onClick={toggle}>+ Nova Transação</C.Button>

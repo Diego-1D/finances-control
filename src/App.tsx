@@ -32,10 +32,6 @@ function App() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   setFilteredList(filterListByMonth(list, currentMonth));
-  // }, [list, currentMonth]);
-
   useEffect(() => {
     setFilteredList(filterListByMonth(listagem, currentMonth));
   }, [listagem, currentMonth]);
