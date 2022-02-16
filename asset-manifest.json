@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/finances-control/static/css/main.c5cd3e45.css",
+    "main.js": "/finances-control/static/js/main.766827e5.js",
+    "index.html": "/finances-control/index.html",
+    "main.c5cd3e45.css.map": "/finances-control/static/css/main.c5cd3e45.css.map",
+    "main.766827e5.js.map": "/finances-control/static/js/main.766827e5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c5cd3e45.css",
+    "static/js/main.766827e5.js"
+  ]
+}
