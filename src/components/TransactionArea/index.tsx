@@ -1,7 +1,6 @@
 import * as C from "./styles";
 import { formatCurrentMonth } from "../../helpers/dateFilter";
 import { useState } from "react";
-
 import { Modal } from "../Modal";
 
 type Props = {

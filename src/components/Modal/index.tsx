@@ -1,9 +1,7 @@
 import { useState } from "react";
 import * as C from "./styles";
-import { Item } from "../../types/Item";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
-
 import moment from "moment";
 
 export const Modal = ({ id = "modal", onClose = () => { } }) => {
@@ -11,7 +9,7 @@ export const Modal = ({ id = "modal", onClose = () => { } }) => {
   const [dateField, setDateField] = useState("");
   const [categoryField, setCategoryField] = useState("");
   const [valueField, setValueField] = useState(0);
-  const [expenseField, setExpenseField] = useState(false);
+  const [expenseField, setExpenseField] = useState(true);
 
   const handleAddEvent = () => {
     let errors: string[] = [];

@@ -24,7 +24,3 @@ export const Body = styled.div`
     max-width: 980px;
     margin-bottom: 50px;
 `;
-
-export const Icon = styled.img`
-    height: 28px;
-`;
